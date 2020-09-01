@@ -8,7 +8,7 @@
 
  @foreach($books as $book)
 
-    <h2 class="text-uppercase">{{$book->title}}</h2>
+    <h2 class="text-capitalize">{{$book->title}}</h2>
 
 
 <p>{{$book->desc}}</p>

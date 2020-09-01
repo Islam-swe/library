@@ -6,14 +6,23 @@
 @section('content')
 
 
-<h1>{{$book->id}}</h1>  
-<h4>{{$book->title}}</h4> 
-<p>{{$book->desc}}</p>  
-<a href="{{route('books.edit',$book->id)}}"><button  class="btn btn-primary" >Update Info</button></a>
-<a href="{{route('books.delete',$book->id)}}"><button  class="btn btn-danger" >Delete</button></a>
+    <div class="row">
+        <div class="col-md-6">
+            <img class="w-100" src="{{asset('uploads/books').'/'.$book->img}}" alt="" srcset="">
+        </div>
 
-<hr>    
-<a href="{{route('allbooks')}}">Back</a> 
+        <div class="col-md-6">
+            <h1>{{$book->id}}</h1>  
+            <h4>{{$book->title}}</h4> 
+            <p>{{$book->desc}}</p>  
+            <a class="btn btn-primary" href="{{route('books.edit',$book->id)}}">Update Info</a>
+            <a class="btn btn-danger"  href="{{route('books.delete',$book->id)}}">Delete</a> 
+            <a class="btn btn-info" href="{{route('allbooks')}}">Back</a> 
+        </div>
+
+
+    </div>
+
 
 
 @endsection
