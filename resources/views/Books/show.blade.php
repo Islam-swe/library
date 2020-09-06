@@ -1,6 +1,6 @@
 @extends('layout')
 @section('title')
-    Show
+Book-{{$book->title}}
 @endsection
 
 @section('content')
