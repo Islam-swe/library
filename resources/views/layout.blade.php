@@ -40,6 +40,12 @@
               <a class="nav-link" href="{{route('auth.register')}}">Register</a>
             </li>
          
+            <li class="nav-item">
+              <a class="nav-link" href="{{route('auth.login')}}">Login</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{route('auth.logout')}}">Logout</a>
+            </li>
         </div>
     </nav>
     {{-- end of navbar --}}

@@ -24,7 +24,7 @@ class AuthController extends Controller
             [
                 'name'=>'required|string|max:100',
                 'email'=>'required|email|max:100',
-                'pass'=>'required|string|min:6|max:50'
+                'password'=>'required|string|min:6|max:50'
             ]
         );
         $user=User::create
@@ -32,7 +32,7 @@ class AuthController extends Controller
             [
                 'name'=>$request->name,
                 'email'=>$request->email,
-                'pass'=>Hash::make($request->pass)
+                'password'=>Hash::make($request->password)
             ]
         );
 
@@ -40,6 +40,44 @@ class AuthController extends Controller
         Auth::login($user);
         return redirect(route('allbooks'));
 
+    }
+
+    //display registeration form
+    function login()
+    {
+        return view('auth.login');
+    }
+
+
+    //handle registeration fom (validate and create in db)
+    function handleLogin(Request $request)
+    {
+        $request->validate
+        (
+            [
+                'email'=>'required|email|max:100',
+                'password'=>'required|string|min:6|max:50'
+            ]
+        );
+     
+
+        $is_login=Auth::attempt(['email' => $request->email, 'password' => $request->password]);
+       
+        
+        if(!$is_login)
+        {
+           return back();
+        }
+        return redirect(route('allbooks'));
+
+    }
+
+    //logout
+
+    function logout()
+    {
+        Auth::logout();
+        return back();
     }
 
 

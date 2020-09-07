@@ -32,11 +32,11 @@
 {{-- ============================================================== --}}
 
     <div class="form-group">
-        <input type="text" class="form-control" value="{{old('pass')}}" name="pass" placeholder="Password">
+        <input type="text" class="form-control" value="{{old('password')}}" name="password" placeholder="Password">
     </div>
-    @if ($errors->first('pass'))
+    @if ($errors->first('password'))
     <div class="alert alert-danger" role="alert">
-        <strong>{{$errors->first('pass')}}</strong>
+        <strong>{{$errors->first('password')}}</strong>
     </div>
     @endif
 
