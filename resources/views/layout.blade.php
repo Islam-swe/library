@@ -31,8 +31,13 @@
             <li class="nav-item">
               <a class="nav-link" href="{{route('categories.index')}}">Categories</a>
             </li>
+            
             <li class="nav-item">
               <a class="nav-link" href="{{route('categories.create')}}">Add Category</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="{{route('auth.register')}}">Register</a>
             </li>
          
         </div>
