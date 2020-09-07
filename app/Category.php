@@ -10,4 +10,10 @@ class Category extends Model
     [
         'name'
     ];
+
+    //belongs to many books
+    public function books()
+    {
+        return $this->belongsToMany('App\Book');
+    }
 }

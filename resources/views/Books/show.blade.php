@@ -12,9 +12,16 @@ Book-{{$book->title}}
         </div>
 
         <div class="col-md-6">
-            <h1>{{$book->id}}</h1>  
-            <h4>{{$book->title}}</h4> 
-            <p>{{$book->desc}}</p>  
+            <h1>{{$book->title}}</h1>  
+            <p>{{$book->desc}}</p> 
+            <h4>Categories</h4>
+            <ul>
+                @foreach ($book->categories as $category)
+                <li>{{$category->name}}</li>
+            @endforeach
+            </ul>
+            
+            <p></p> 
             <a class="btn btn-primary" href="{{route('books.edit',$book->id)}}">Update Info</a>
             <a class="btn btn-danger"  href="{{route('books.delete',$book->id)}}">Delete</a> 
             <a class="btn btn-info" href="{{route('allbooks')}}">Back</a> 

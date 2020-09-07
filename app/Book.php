@@ -10,4 +10,11 @@ class Book extends Model
     [
         'title','desc','img'
     ];
+
+    //belongs to many categories
+
+    public function categories()
+    {
+        return $this->belongsToMany('App\Category');
+    }
 }
