@@ -20,7 +20,7 @@ Route::get('/', function () {
 
 //Book:read
 Route::get('/books','BookController@index')->name('allbooks');
-Route::get('show/{id}', 'BookController@show')->name('onebook');
+Route::get('show/{id}','BookController@show')->name('onebook');
 
 
 //Book:create
@@ -36,3 +36,30 @@ Route::post('books/update/{id}','BookController@update')->name('books.update');
 
 //Book:delete
 Route::get('books/delete/{id}','BookController@delete')->name('books.delete');
+
+
+//=================================================================
+
+
+
+
+
+//Category:read
+Route::get('/categories','CategoryController@index')->name('categories.index');
+Route::get('category/{id}', 'CategoryController@show')->name('categories.show');
+
+
+//Category:create
+Route::get('categories/create','CategoryController@create')->name('categories.create');
+//Category:store
+Route::post('categories/store','CategoryController@store')->name('categories.store');
+
+//Category:edit
+Route::get('categories/edit/{id}','CategoryController@edit')->name('categories.edit');
+//Category:update
+Route::post('categories/update/{id}','CategoryController@update')->name('categories.update');
+
+
+//Category:delete
+Route::get('categories/delete/{id}','CategoryController@delete')->name('categories.delete');
+

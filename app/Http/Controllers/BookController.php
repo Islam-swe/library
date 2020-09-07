@@ -74,6 +74,9 @@ class BookController extends Controller
       return view('books/edit',compact('book'));
     }
 
+
+
+    
     //func update book in db and redirect
     public function update(Request $request,$id)
     {
@@ -115,6 +118,8 @@ class BookController extends Controller
       //redirect to the show page with id of the book
       return  redirect(route('onebook',$id));
     }
+
+
 
 
 

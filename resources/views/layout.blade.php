@@ -28,6 +28,12 @@
             <li class="nav-item">
               <a class="nav-link" href="{{route('books.create')}}">Add Book</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{route('categories.index')}}">Categories</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{route('categories.create')}}">Add Category</a>
+            </li>
          
         </div>
     </nav>

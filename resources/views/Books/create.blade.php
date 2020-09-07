@@ -38,7 +38,7 @@
      @endif
 
     <div class="text-center w-100" >
-        <button class="btn btn-dark w-25" type="submit">Add</button>
+        <button class="btn btn-dark w-25" type="submit">Add Book</button>
     </div>
 </form>
 @endsection
