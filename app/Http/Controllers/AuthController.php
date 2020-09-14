@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\User;
+use Laravel\Socialite\Facades\Socialite;
 
 class AuthController extends Controller
 {
@@ -27,6 +28,7 @@ class AuthController extends Controller
                 'password'=>'required|string|min:6|max:50'
             ]
         );
+        
         $user=User::create
         (
             [
@@ -77,13 +79,46 @@ class AuthController extends Controller
     function logout()
     {
         Auth::logout();
-        return back();
+        return redirect(route('auth.login'));
     }
 
 
 
+    public function redirectToProvider()
+    {
+        return Socialite::driver('github')->redirect();
+    }
+
+    /**
+     * Obtain the user information from GitHub.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function handleProviderCallback()
+    {
+        $user = Socialite::driver('github')->user();
+        $db_user=User::where('email','=',"$user->email")->first();
 
 
+        if($db_user==null)
+        {
+            $registered_user=User::create
+            ([
+                'name'=>$user->name,
+                'email'=>$user->email,
+                'password'=>Hash::make('123456'),
+                'oauth_token'=>$user->token,
+            ]); 
+            Auth::login($registered_user);
+        }
+        else{
+         Auth::login($db_user);   
+        }
+
+           return redirect(route('allbooks')); 
+        
+
+    } 
 
 
 

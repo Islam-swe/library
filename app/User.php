@@ -12,10 +12,13 @@ class User extends Authenticatable
 
     
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password','is_admin','access_token','oauth_token'
     ];
 
-   
+   function notes()
+   {
+       return $this->hasMany('\App\Note');
+   }
     protected $hidden = [
         'password'
     ];

@@ -48,8 +48,25 @@
                      <strong>{{$errors->first('img')}}</strong>
                   </div>
                @endif
+
+               <h4>Update Categories:</h4>
+               @foreach ($categories as $category)
+                   <div class="form-check">
+                  <label class="form-check-label">
+                  <input type="checkbox" class="form-check-input" name="category_ids[]" value="{{$category->id}}">
+                    {{$category->name}}
+                  </label>
+                </div> 
+               @endforeach
+               @if ($errors->first('category_ids'))
+               <div class="alert alert-danger" role="alert">
+                  <strong>{{$errors->first('category_ids')}}</strong>
+               </div>
+               @endif
+               
          </div>
       </div>
+     
       <button class="btn btn-dark w-100" type="submit">Update</button>
    </div>
    

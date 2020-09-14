@@ -4,10 +4,16 @@
    All-Categories 
 @endsection
 
+
+
 @section('content')
-<div class="row">
+<div class="container text-center my-3">
+   <a class="btn btn-info" href="{{route('categories.create')}}">Add Category</a>
+</div>
+
+<div class="row ">
    @foreach($categories as $category)
-   <div class="col-md-4">
+   <div class="col-md-4 my-2">
      
 
      {{-- {{$category->books}} --}}

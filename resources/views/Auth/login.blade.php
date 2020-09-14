@@ -6,8 +6,9 @@
 
 
 @section('content')
+<div class="w-50 m-auto">
     
-<form class="w-50 m-auto" action="{{route('auth.handleLogin')}}" method="POST" >
+<form  action="{{route('auth.handleLogin')}}" method="POST" >
    @csrf
   
    <h1>Login</h1>
@@ -37,7 +38,11 @@
 
  
     <div class="text-center w-100" >
-        <button class="btn btn-dark w-25" type="submit">Submit</button>
+        <button class="btn btn-dark w-100" type="submit">Submit</button>
     </div>
 </form>
+
+
+<a class="btn btn-success w-100 my-1" href="{{route('auth.github.redirect')}}">Sign up with Github</a>
+</div>
 @endsection

@@ -1,16 +1,18 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Validation\Validator;
 
 use Illuminate\Http\Request;
 use App\Book;
+use App\Category;
+
 class BookController extends Controller
 {
     //display all books
     public function index()
     {
-       $books= Book::orderBy('id','desc')->paginate(4);
+       $books= Book::orderBy('id','desc')->paginate(6);
 
        return view("books/index",compact('books'));
     }
@@ -21,13 +23,14 @@ class BookController extends Controller
         $book=Book::findOrFail($id);
         
          return view('books.show',compact('book'));
-        //dd($book);
+        
     }
 
     //create new book (view the create form)
     public function create()
     {
-       return  view('books.create');
+      $categories=Category::get();
+       return  view('books.create',compact('categories'));
     }
     //store the new book in db and redirect to view
     public function store(Request $request)
@@ -39,7 +42,9 @@ class BookController extends Controller
           [
             'title'=>'required|max:100|string',
             'desc'=>'required|string',
-            'img'=>'required|image'
+            'img'=>'required|image',
+            'category_ids'=>'required|',
+            'category_ids.*'=>'exists:categories,id'
           ]
         );
 
@@ -47,14 +52,13 @@ class BookController extends Controller
         $img=$request->img;
         $imgOriginalName=$img->getClientOriginalName();
         $imgNewName="Book-".uniqid()."".time().$imgOriginalName;
-       // dd($imgNewName);
         $img->move(public_path('uploads/books'),$imgNewName);
        
 
         $title=$request->title;
         $desc=$request->desc;
 
-        Book::create
+        $book=Book::create
         (
           [
             'title'=>$title,
@@ -62,6 +66,9 @@ class BookController extends Controller
             'img'=>$imgNewName
           ]
         );
+       
+       $book->categories('categories')->sync($request->category_ids);
+
         return redirect(route('allbooks'));
 
     }
@@ -71,7 +78,8 @@ class BookController extends Controller
     {
       //$book=Book::where('id','=',$id)->first();
       $book=Book::findOrFail($id);
-      return view('books/edit',compact('book'));
+      $categories=Category::get();
+      return view('books/edit',compact('book','categories'));
     }
 
 
@@ -80,18 +88,21 @@ class BookController extends Controller
     //func update book in db and redirect
     public function update(Request $request,$id)
     {
+
       //validation
       $request->validate
       (
         ['title'=>'required|max:100|string',
          'desc'=>'required|string',
-         'img'=>'nullable|image'
+         'img'=>'nullable|image',
+         'category_ids'=>'required',
+         'category_ids.*'=>'required|exists:categories,id'
         ]
       );
 
       $book=Book::findOrFail($id);
       $imgName=$book->img;
-      //dd($imgName);
+    
       if($request->hasFile('img'))
       {
         if($imgName!==null)
@@ -115,6 +126,7 @@ class BookController extends Controller
         ]
       );
      
+      $book->categories()->sync($request->category_ids);
       //redirect to the show page with id of the book
       return  redirect(route('onebook',$id));
     }
