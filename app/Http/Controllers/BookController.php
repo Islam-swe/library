@@ -143,12 +143,21 @@ class BookController extends Controller
       {
         unlink(public_path('uploads/books/').$book->img);
       }
-      
+
+      $book->categories()->sync([]);
       $book->delete();
       return redirect(route('allbooks'));
-     //return back();
+      
     }
 
+    //realtime search 
+    public function search(Request $request)
+    {
+      $bookTitles=Book::where('title','like',"%$request->keyword%")->get();
+      
+      return response()->json($bookTitles);
+
+    }
 
 
 
